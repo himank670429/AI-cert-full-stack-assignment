@@ -1,21 +1,32 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const fs = require('fs')
 require("dotenv").config();
 
 const app = express();
 const port = process.env.PORT || 3000;
+app.use(express.json())
 
-(function run(){
-    try{
-        // connect to DB
-        const client = mongoose.createConnection(process.env.DB_URI)
-        console.log('connected to Database successfully!!')
-        // define the API rountes
-    }
-    catch(error){
-        console.log(error?.message)
-    }
-})()
+const {
+	getTodos,
+	getTodo,
+	addTodo,
+	updateTodo,
+	deleteTodo,
+} = require("./controller/TodoController");
+
+
+
+// define the API rountes
+app.get("/tasks", getTodos);
+
+app.get("/tasks/:id", getTodo);
+
+app.post("/tasks", addTodo);
+
+app.put("/tasks/:id", updateTodo);
+
+app.delete("/tasks/:id", deleteTodo);
 
 
 app.listen(port, () => {
