@@ -22,11 +22,13 @@ module.exports = {
 
     // function to add a todo
 	addTodo: async function (req, res) {
+        console.log(req.body)
 		try {
-			const todo = validateTodos(req.body);
-            // add the id
-            todo.id = crypto.randomUUID()
-            todo.completed = false;
+            const todo = validateTodos({
+                ...req.body, 
+                completed:false, 
+                id:crypto.randomUUID()
+            });
             
             // save the todo
             todos.push(todo)
