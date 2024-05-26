@@ -98,10 +98,11 @@ function Form() {
 								required
 								placeholder="Ex. Wash all my clothes till 3pm "
 								className="outline-none bg-[#f0f0f0] p-4 rounded-lg w-fit"
+								min={(new Date()).toISOString().slice(0, 16).split("T")[0]}
 								value={
-                                    formData.dueDate ? 
-									new Date(formData.dueDate).toISOString().slice(0, 16).split("T")[0] :
-									""
+									formData.dueDate
+										? new Date(formData.dueDate).toISOString().slice(0, 16).split("T")[0]
+										: ""
 								}
 								onChange={(e) => {
 									const value = Date.parse(e.target.value);
@@ -118,7 +119,7 @@ function Form() {
 								disabled={!Boolean(id)}
 								onClick={async (e) => {
 									await deleteTodo(id);
-                                    alert("todo deleted")
+									alert("todo deleted");
 									navigate("/");
 								}}
 								className=" px-4 py-1 rounded-md flex gap-2 items-center bg-[#f0f0f0] text-[#4d4d4d]"

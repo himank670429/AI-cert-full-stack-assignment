@@ -15,8 +15,6 @@ function TodoItem({
 	}
 
 	const pasrsedDate = new Date(dueDate).toISOString().slice(0, 16).split("T")[0];
-	const diff = Date.now() - dueDate;
-	const numberofday = (new Date(diff)).getDay()
 
 	const textStyle =
 		"text-xl text-transparent bg-clip-text bg-gradient-to-tr from-[#4F68C4] to-[#1A3594]";
@@ -39,7 +37,7 @@ function TodoItem({
 					style={{ textDecoration: completed ? "line-through" : "none" }}
 					className="text-xl font-semibold text-[#1e1e1e]"
 				>
-					{title} {completed ? null : <span className="text-[#5c5b5b] text-base">({numberofday} {numberofday !== 1 ? "days" : "day"} left)</span>}
+					{title}
 				</span>
 				<span className="text-sm flex gap-2 items-center text-[#989898]">
 					<i class="fa-regular fa-calendar"></i>
